@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Platzi Conf Photo</title>
+</head>
+
+<style>
+  body {
+    background: url(dark.png) 0 0;
+    color: white;
+  }
+
+  img {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    height: auto;
+  }
+</style>
+
+<body>
+  <img src="https://media.giphy.com/media/l3lWUFTcaFBTIokIiz/giphy.gif" alt="Platzi Conf">
+  <div style="padding:10px">
+    <input type="file" name="myfile" id="photoupload" onchange="handleImage()" />
+  </div>
+  <span id="download" style="margin:10px;display:block"></span>
+  <canvas id="myCanvas" width="800" height="800" style="margin:10px"></canvas>
+</body>
+
+<script>
+  const handleImage = () => {
+    const image = document.getElementById("photoupload");
+    const canvas = document.getElementById("myCanvas");
+    const ctx = canvas.getContext("2d");
+    const imageObj1 = new Image();
+    const imageObj2 = new Image();
+    imageObj1.src = URL.createObjectURL(image.files[0]);
+    imageObj1.onload = function () {
+      ctx.drawImage(imageObj1, 150, 150, 500, 500);
+      imageObj2.src = "platzi_conf_2020.png";
+      imageObj2.onload = function () {
+        ctx.drawImage(imageObj2, 0, 0, 800, 800);
+        document.getElementById("download").textContent = "Descargar: click derecho, Guardar imagen como.";
+      }
+    };
+  }
+</script>
+
+</html>
